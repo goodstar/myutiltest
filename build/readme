@@ -1,0 +1,2 @@
+创建容器镜像命令
+docker build -t app/myutiltest:v1 .
