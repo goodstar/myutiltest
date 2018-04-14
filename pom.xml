@@ -1,0 +1,132 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.myutiltest</groupId>
+	<artifactId>myutiltest</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>myutiltest</name>
+	<url>http://maven.apache.org</url>
+
+	<modules>
+		<module>myutiltest-common</module>
+		<module>myutiltest-biz</module>
+		<module>myutiltest-web</module>
+		<module>myutiltest-client</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		 <!-- jdk 版本配置（默认maven编译代码也用这个版本） -->
+        <jdk.version>1.8</jdk.version>
+        <maven-compiler-plugin.sourceEncoding>UTF-8</maven-compiler-plugin.sourceEncoding>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>myutiltest</groupId>
+				<artifactId>myutiltest-common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>myutiltest-biz</groupId>
+				<artifactId>myutiltest-biz</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>myutiltest-client</groupId>
+				<artifactId>myutiltest-client</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<!-- 应用pom插件依赖管理 -->
+		<pluginManagement>
+			<plugins>
+				<!-- compiler 插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.7.0</version>
+					<configuration>
+						<source>${jdk.version}</source>
+						<target>${jdk.version}</target>
+						<encoding>${maven-compiler-plugin.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<!-- war 包插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<!-- jetty 插件 -->
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>maven-jetty-plugin</artifactId>
+					<version>7.0.0.pre5</version>
+				</plugin>
+				<!-- maven deploy 上传源代码 插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.0.1</version>
+					<configuration>
+						<attach>true</attach>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>deploy</phase>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- 测试插件（默认情况下，surefire会执行文件名以Test开头或结尾的测试用例，或者是以TestCase结尾的测试用例） -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.20</version>
+					<configuration><!-- 测试选项配置 -->
+						<skipTests>true</skipTests><!-- 默认跳过测试执行（可以直接通过"mvn test" 执行） -->
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<!-- 全局插件引入（所有直接间接继承块都会默认引入） -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<!-- 源文件目录（可以被执行环境变量替换） -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>WEB-INF</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+</project>
