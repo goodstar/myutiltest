@@ -20,13 +20,21 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		 <!-- jdk 版本配置（默认maven编译代码也用这个版本） -->
-        <jdk.version>1.8</jdk.version>
-        <maven-compiler-plugin.sourceEncoding>UTF-8</maven-compiler-plugin.sourceEncoding>
+		<!-- javax -->
+		<javax.servlet-api.version>4.0.0</javax.servlet-api.version>
+		<!-- jdk 版本配置（默认maven编译代码也用这个版本） -->
+		<jdk.version>1.8</jdk.version>
+		<maven-compiler-plugin.sourceEncoding>UTF-8</maven-compiler-plugin.sourceEncoding>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- javax -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax.servlet-api.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>myutiltest</groupId>
 				<artifactId>myutiltest-common</artifactId>

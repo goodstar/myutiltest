@@ -7,4 +7,13 @@
 
 
     <display-name>Test</display-name>
+    <servlet>
+    	<servlet-name>HelloWorld</servlet-name>
+    	<servlet-class>org.myutiltest.web.HelloWordServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>HelloWorld</servlet-name>
+    	<url-pattern>/hello</url-pattern>
+    </servlet-mapping>
 </web-app>
