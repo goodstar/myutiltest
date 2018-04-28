@@ -28,10 +28,19 @@
 		<project.model.main.version>1.0</project.model.main.version>
 		<myutiltest.version>1.0${maven.dependency.env}</myutiltest.version>
 		<maven-compiler-plugin.sourceEncoding>UTF-8</maven-compiler-plugin.sourceEncoding>
+		<!--spring -->
 		<spring.version>4.3.2.RELEASE</spring.version>
 		<spring.core.version>4.3.2.RELEASE</spring.core.version>
 		<aspectj.version>1.8.9</aspectj.version>
-		<java.sql.version>5.1.40</java.sql.version>
+		<!-- database -->
+		<mybatis.version>3.4.0</mybatis.version>
+		<mybatis-spring.version>1.3.0</mybatis-spring.version>
+		<mysql-connector-java.version>5.1.45</mysql-connector-java.version>
+		<druid.version>1.0.12</druid.version>
+		<!-- json -->
+		<jackson.version>2.6.1</jackson.version>
+		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+		<fastjson.version>1.1.42</fastjson.version>
 	</properties>
 
 	<dependencyManagement>
@@ -118,10 +127,11 @@
 				<artifactId>mybatis</artifactId>
 				<version>${mybatis.version}</version>
 			</dependency>
+			<!-- 工程结构 -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>${java.sql.version}</version>
+				<version>${mysql-connector-java.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.myutiltest</groupId>
