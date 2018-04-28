@@ -7,19 +7,16 @@
 	<parent>
 		<groupId>com.myutiltest</groupId>
 		<artifactId>myutiltest</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
+
 	<artifactId>myutiltest-biz</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<version>${project.model.main.version}${maven.dependency.env}</version>
+
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>myutiltest-client</groupId>
+			<groupId>com.myutiltest</groupId>
 			<artifactId>myutiltest-client</artifactId>
 		</dependency>
 	</dependencies>
