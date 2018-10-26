@@ -24,20 +24,21 @@ public final class RpcProxy {
 
 	public static void main(String[] args) throws Exception {
 		socket = new Socket("127.0.0.1", 8891);
+		socket.setTcpNoDelay(false);
 		
-		Hello hello = clientProxy(Hello.class);
-		String ret = hello.sayHai("hai");
-		System.out.println(ret);
 		
 		Executors.newSingleThreadExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				while (true) {
 					try {
-						
-						System.out.println("hahaha");
 						InputStream inputStream = socket.getInputStream();
-						DataInputStream dataInputStream = new DataInputStream(inputStream);
+						if (inputStream.available() == 0) {
+							Thread.sleep(200);
+							System.out.println("hah");
+							continue;
+						}
+						DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 						int len = dataInputStream.readInt();
 						byte[] data = new byte[len];
 						dataInputStream.readFully(data, 0, len);
@@ -49,10 +50,17 @@ public final class RpcProxy {
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 			}
 		});
+		
+		Hello hello = clientProxy(Hello.class);
+		String ret = hello.sayHai("hai");
+		System.out.println(ret);
 		
 		Thread.sleep(Integer.MAX_VALUE);
 	}
@@ -74,7 +82,7 @@ public final class RpcProxy {
 						DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
 						dataOutputStream.writeInt(data.length);
 						dataOutputStream.write(data);
-						dataOutputStream.flush();
+						//dataOutputStream.flush();
 						
 						RpcInvoker rpcInvoker = new RpcInvoker();
 						RpcInvoker.InvokerMaps.put(rpcRequest.getRequestId(), rpcInvoker);
