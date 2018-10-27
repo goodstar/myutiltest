@@ -18,8 +18,6 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
-import org.junit.Before;
-import org.junit.Test;
 
 @SuppressWarnings("all")
 public class EsFileTest {
@@ -28,7 +26,7 @@ public class EsFileTest {
 	String Index = "books";
 	String Type = "article";
 
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 		Settings esSettings = Settings.builder().put("cluster.name", "elasticsearch") // 设置ES实例的名称
 				.build();
@@ -37,7 +35,7 @@ public class EsFileTest {
 		client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
 	}
 
-	@Test
+	//@Test
 	public void testCreateIndex() throws Exception {
 		File parent = new File("/Users/lixing/books/");
 		File[] arr = parent.listFiles(new FileFilter() {
@@ -58,7 +56,7 @@ public class EsFileTest {
 		}
 	}
 
-	@Test
+	//@Test
 	public void testQuery() {
 		QueryBuilder queryBuilder = QueryBuilders.fuzzyQuery("content", "title");
 		long start = System.currentTimeMillis();
